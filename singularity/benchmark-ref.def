@@ -1,0 +1,12 @@
+bootstrap: docker
+from: continuumio/miniconda3
+
+%environment
+    export PATH=/opt/conda/bin:$PATH
+
+%post
+    export PATH=/opt/conda/bin:$PATH
+    conda install -c conda-forge -c bioconda mash=2.1 refseq_masher bwa samtools shovill=1.0.4
+
+    curl -o /opt/conda/bin/refrank.py https://gitlab.com/s.fuchs/refRank/raw/master/refrank.py
+    chmod +x /opt/conda/bin/refrank.py
