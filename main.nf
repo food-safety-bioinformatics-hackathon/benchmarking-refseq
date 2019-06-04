@@ -111,7 +111,6 @@ with open("${tsv}","r") as ifh:
     with open("${name}_hits.tsv", "w") as ofh:
         for hit in hits:
             ofh.write("{}\\n".format(hit))
-          ofh.write("{}\n".format(hit))
   """
 }
 
