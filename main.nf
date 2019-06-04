@@ -92,7 +92,7 @@ process find_GCF {
   script:
   name = tsv.getBaseName()
 
-  """
+"""
   #!/usr/bin/env python
 import re
 with open("${tsv}","r") as ifh:
@@ -107,8 +107,8 @@ with open("${tsv}","r") as ifh:
             hits.append(line.split("\\t")[assembly_accession_index])
             counter += 1
     with open("${name}_hits.tsv", "w") as ofh:
-            for hit in hits:
-                ofh.write("{}\\n".format(hit))
+        for hit in hits:
+            ofh.write("{}\\n".format(hit))
           ofh.write("{}\n".format(hit))
   """
 }
