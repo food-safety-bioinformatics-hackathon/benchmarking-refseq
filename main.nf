@@ -134,11 +134,11 @@ name = ref.getBaseName()
 for gcf in `cat ${top10hits}`; do
 	HITTREF=`\\ls /home/centos/benchmarking-refseq/data/noplasmids/${gcf}*`
 	bwa index $HITREF
-	bwa mem $HITREF !r1 !r2 | samtools view -S -b - | samtools sort > sort.bam
+	bwa mem $HITREF !{r1} !{r2} | samtools view -S -b - | samtools sort > sort.bam
 	bamcov sort.bam >> scores.csv
 done
 bwa index !{ref}
-bwa mem !{ref} !r1 !r2 | samtools view -S -b - | samtools sort > sort.bam
+bwa mem !{ref} !{r1} !{r2} | samtools view -S -b - | samtools sort > sort.bam
 bamcov sort.bam >> scores.csv
 score.py scores.csv > final_scores.csv
 '''
