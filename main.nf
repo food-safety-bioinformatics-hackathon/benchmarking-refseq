@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 // nextflow.preview.dsl = 2
-params.ref = "/qib/platforms/Informatics/hackathon2019/data/NZ_CP009072.1.fasta"
+params.ref = "/qib/platforms/Informatics/hackathon2019/data/*.fasta"
 params.length_reads = 150
 params.seed = 1000
 params.output = "results"
