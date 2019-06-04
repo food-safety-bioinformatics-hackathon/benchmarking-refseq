@@ -63,7 +63,7 @@ if (params.assembly) {
 }
 
 process refseq_masher_reads {
-publishDir "${params.output}/refseq_masher_reads", mode: "move"
+publishDir "${params.output}/refseq_masher_reads", mode: "copy"
 
 cpus 8
 
@@ -95,20 +95,20 @@ process find_GCF {
   #!/usr/bin/env python
   import re
   with open("${tsv}","r") as ifh:
-          lines = ifh.readlines()
-          headers = lines[0].split("\t")
-          assembly_accession_index = headers.index("assembly_accession")
-          hits = []
-          counter = 0
-          for line in lines[1:]:
-                  asm = line.split("\t")[assembly_accession_index]
-                  if (re.match("^GCF", asm)) and (counter < 10):
-                          hits.append(line.split("\t")[assembly_accession_index])
-                          counter += 1
-          with open("${name}_hits.tsv", "w") as ofh:
-                  for hit in hits:
-                          ofh.write("{}\n".format(hit))
-                ofh.write("{}\n".format(hit))
+      lines = ifh.readlines()
+      headers = lines[0].split("\t")
+      assembly_accession_index = headers.index("assembly_accession")
+      hits = []
+      counter = 0
+      for line in lines[1:]:
+              asm = line.split("\t")[assembly_accession_index]
+              if (re.match("^GCF", asm)) and (counter < 10):
+                      hits.append(line.split("\t")[assembly_accession_index])
+                      counter += 1
+      with open("${name}_hits.tsv", "w") as ofh:
+              for hit in hits:
+                      ofh.write("{}\n".format(hit))
+            ofh.write("{}\n".format(hit))
   """
 }
 
