@@ -1,5 +1,5 @@
+#!/usr/bin/env python
 # This will load in a BAMCov output file and look at the coverage and mean depth
-
 import sys
 import os
 
