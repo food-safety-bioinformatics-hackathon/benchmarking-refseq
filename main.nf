@@ -140,7 +140,7 @@ done
 bwa index !{ref}
 bwa mem !{ref} !{r1} !{r2} | samtools view -S -b - | samtools sort > sort.bam
 bamcov -H sort.bam >> scores.csv
-score.py scores.csv > final_scores.csv
+score.py scores.csv > final_scores_!{name}_!{seed}.csv
 '''
 }
 
