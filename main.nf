@@ -123,7 +123,7 @@ file 10hits from find_gcf_ch
 file ref from sim_ref_ch
 
 output:
-file("score.csv")
+file("final_scores.csv")
 
 script:
 name = ref.getBaseName()
@@ -138,6 +138,7 @@ done
 bwa index ${ref}
 bwa mem ${ref} $r1 $r2 | samtools view -S -b - | samtools sort > sort.bam
 bamcov sort.bam | gawk '{print $6,$7}' - >> scores.csv
+score.py scores.csv > final_scores.csv
 """
 }
 
