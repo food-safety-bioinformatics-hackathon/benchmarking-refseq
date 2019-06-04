@@ -7,6 +7,8 @@ params.output = "results"
 params.rank = false
 params.score = false
 params.assembly = false
+params.sim = 10
+params.wgsim_options = "-N 10000"
 
 refs =  Channel.fromPath(params.ref)
 
@@ -15,7 +17,7 @@ publishDir "${params.output}/simulation", mode: "copy"
 tag {seed}
 input:
 file(ref) from refs
-each sim from 1..10
+each sim from 1..params.sim
 
 output:
 set seed, file("sim_${name}_${seed}_1.fq"), file("sim_${name}_${seed}_2.fq") into (sim_ch_shovill, sim_ch_refrank, sim_ch_refseq, sim_ch_get_cov)
@@ -25,7 +27,7 @@ script:
 seed = params.seed + sim
 name = ref.getBaseName()
 """
-wgsim -1 ${params.length_reads} -2 ${params.length_reads} -S ${seed} ${ref} sim_${name}_${seed}_1.fq sim_${name}_${seed}_2.fq
+wgsim $params.wgsim_options -1 ${params.length_reads} -2 ${params.length_reads} -S ${seed} ${ref} sim_${name}_${seed}_1.fq sim_${name}_${seed}_2.fq
 """
 }
 
