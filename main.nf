@@ -6,6 +6,7 @@ params.seed = 1000
 params.output = "results"
 params.rank = false
 params.score = false
+params.assembly = false
 
 refs =  Channel.fromPath(params.ref)
 
@@ -26,38 +27,39 @@ wgsim -1 ${params.length_reads} -2 ${params.length_reads} -S ${seed} ${ref} sim_
 """
 }
 
-process shovill {
-publishDir "${params.output}/shovill", saveAS: {"sim_${seed}"}, mode: "copy"
-cpus 8
-tag {seed}
-input:
-set seed, file(r1), file(r2) from sim_ch_shovill
+if (params.assembly) {
+  process shovill {
+  publishDir "${params.output}/shovill", saveAS: {"sim_${seed}"}, mode: "copy"
+  cpus 8
+  tag {seed}
+  input:
+  set seed, file(r1), file(r2) from sim_ch_shovill
 
-output:
-set seed, file("output") into shovill_ch
+  output:
+  set seed, file("output") into shovill_ch
 
-script:
+  script:
 
-"""
-shovill --outdir output --R1 $r1 --R2 $r1
-"""
-}
+  """
+  shovill --outdir output --R1 $r1 --R2 $r1
+  """
+  }
 
+  process refseq_masher_assembly {
+  publishDir "${params.output}/refseq_masher_assembly"
+  tag {seed}
+  input:
+  set seed, file(output) from shovill_ch
 
-process refseq_masher_assembly {
-publishDir "${params.output}/refseq_masher_assembly"
-tag {seed}
-input:
-set seed, file(output) from shovill_ch
+  output:
+  file("refseq_masher_assembly_${seed}.tsv") into masher_assembly_ch
 
-output:
-file("refseq_masher_assembly_${seed}.tsv") into masher_assembly_ch
+  script:
 
-script:
-
-"""
-refseq_masher matches --top-n-results 50 --output "refseq_masher_assembly_${seed}.tsv" output/contigs.fa
-"""
+  """
+  refseq_masher matches --top-n-results 50 --output "refseq_masher_assembly_${seed}.tsv" output/contigs.fa
+  """
+  }
 }
 
 process refseq_masher_reads {
@@ -69,14 +71,47 @@ input:
 set seed, file(r1), file(r2) from sim_ch_refseq
 
 output:
-file("refseq_masher_reads_${seed}.tsv") into masher_reads_ch
+file("refseq_masher_reads_${name}_${seed}.tsv") into masher_reads_ch
+
 
 script:
-
+name = r1.getBaseName()
 """
-refseq_masher contains --top-n-results 50 --parallelism ${task.cpus} --output "refseq_masher_reads_${seed}.tsv" $r1 $r2
+refseq_masher contains --top-n-results 50 --parallelism ${task.cpus} --output "refseq_masher_reads_${name}_${seed}.tsv" $r1 $r2
 """
 }
+
+process find_GCF {
+	publishDir "${params.output}/top10hits", mode: "move" 
+  input:
+  file tsv from masher_reads_ch
+  output:
+  file("${name}_hits.tsv")
+  
+  script:
+  name = tsv.getBaseName()
+
+  """
+  #!/usr/bin/env python
+  import re
+  with open("${tsv}","r") as ifh:
+          lines = ifh.readlines()
+          headers = lines[0].split("\t")
+          assembly_accession_index = headers.index("assembly_accession")
+          hits = []
+          counter = 0
+          for line in lines[1:]:
+                  asm = line.split("\t")[assembly_accession_index]
+                  if (re.match("^GCF", asm)) and (counter < 10):
+                          hits.append(line.split("\t")[assembly_accession_index])
+                          counter += 1
+          with open("${name}_hits.tsv", "w") as ofh:
+                  for hit in hits:
+                          ofh.write("{}\n".format(hit))
+                ofh.write("{}\n".format(hit))
+  """
+}
+
 
 if (params.rank) {
   process ref_rank {
