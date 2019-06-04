@@ -16,8 +16,10 @@ tag {seed}
 input:
 file(ref) from refs
 each sim from 1..10
+
 output:
-set seed, file("sim_${name}_${seed}_1.fq"), file("sim_${name}_${seed}_2.fq") into (sim_ch_shovill, sim_ch_refrank, sim_ch_refseq)
+set seed, file("sim_${name}_${seed}_1.fq"), file("sim_${name}_${seed}_2.fq") into (sim_ch_shovill, sim_ch_refrank, sim_ch_refseq, sim_ch_get_cov)
+file ref into sim_ref_ch
 
 script:
 seed = params.seed + sim
@@ -65,14 +67,13 @@ if (params.assembly) {
 process refseq_masher_reads {
 publishDir "${params.output}/refseq_masher_reads", mode: "copy"
 
-cpus 8
+cpus 4
 
 input:
 set seed, file(r1), file(r2) from sim_ch_refseq
 
 output:
 file("refseq_masher_reads_${name}_${seed}.tsv") into masher_reads_ch
-
 
 script:
 name = r1.getBaseName()
@@ -86,30 +87,58 @@ process find_GCF {
   input:
   file tsv from masher_reads_ch
   output:
-  file("${name}_hits.tsv")
+  file("${name}_hits.tsv") into find_gcf_ch
   
   script:
   name = tsv.getBaseName()
 
   """
   #!/usr/bin/env python
-  import re
-  with open("${tsv}","r") as ifh:
-      lines = ifh.readlines()
-      headers = lines[0].split("\t")
-      assembly_accession_index = headers.index("assembly_accession")
-      hits = []
-      counter = 0
-      for line in lines[1:]:
-              asm = line.split("\t")[assembly_accession_index]
-              if (re.match("^GCF", asm)) and (counter < 10):
-                      hits.append(line.split("\t")[assembly_accession_index])
-                      counter += 1
-      with open("${name}_hits.tsv", "w") as ofh:
-              for hit in hits:
-                      ofh.write("{}\n".format(hit))
-            ofh.write("{}\n".format(hit))
+import re
+with open("${tsv}","r") as ifh:
+    lines = ifh.readlines()
+    headers = lines[0].split("\\t")
+    assembly_accession_index = headers.index("assembly_accession")
+    hits = []
+    counter = 0
+    for line in lines[1:]:
+        asm = line.split("\\t")[assembly_accession_index]
+        if (re.match("^GCF", asm)) and (counter < 10):
+            hits.append(line.split("\\t")[assembly_accession_index])
+            counter += 1
+    with open("${name}_hits.tsv", "w") as ofh:
+            for hit in hits:
+                ofh.write("{}\\n".format(hit))
+          ofh.write("{}\n".format(hit))
   """
+}
+
+
+process get_coverage {
+tag {name}
+
+input:
+set seed, file(r1), file(r2) from sim_ch_get_cov
+file 10hits from find_gcf_ch
+file ref from sim_ref_ch
+
+output:
+file("score.csv")
+
+script:
+name = ref.getBaseName()
+
+"""
+for gcf in `cat ${10hits}`; do
+	HITTREF=`\ls /home/centos/benchmarking-refseq/data/noplasmids/${gcf}*`
+	bwa index $HITREF
+	bwa mem $HITREF $r1 $r2 | samtools view -S -b - | samtools sort > sort.bam
+	bamcov sort.bam >> scores.csv
+done
+bwa index ${ref}
+bwa mem ${ref} $r1 $r2 | samtools view -S -b - | samtools sort > sort.bam
+bamcov sort.bam | gawk '{print $6,$7}' - >> scores.csv
+"""
 }
 
 
