@@ -115,12 +115,13 @@ with open("${tsv}","r") as ifh:
 
 
 process get_coverage {
+publishDir "${params.output}/top10hits"
 tag {name}
 
 input:
 set seed, file(r1), file(r2) from sim_ch_get_cov
-file 10hits from find_gcf_ch
-file ref from sim_ref_ch
+file(top10hits) from find_gcf_ch
+file(ref) from sim_ref_ch
 
 output:
 file("final_scores.csv")
@@ -129,15 +130,15 @@ script:
 name = ref.getBaseName()
 
 """
-for gcf in `cat ${10hits}`; do
-	HITTREF=`\ls /home/centos/benchmarking-refseq/data/noplasmids/${gcf}*`
+for gcf in `cat ${top10hits}`; do
+	HITTREF=`\\ls /home/centos/benchmarking-refseq/data/noplasmids/${gcf}*`
 	bwa index $HITREF
 	bwa mem $HITREF $r1 $r2 | samtools view -S -b - | samtools sort > sort.bam
 	bamcov sort.bam >> scores.csv
 done
 bwa index ${ref}
 bwa mem ${ref} $r1 $r2 | samtools view -S -b - | samtools sort > sort.bam
-bamcov sort.bam | gawk '{print $6,$7}' - >> scores.csv
+bamcov sort.bam >> scores.csv
 score.py scores.csv > final_scores.csv
 """
 }
