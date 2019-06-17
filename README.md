@@ -1,5 +1,5 @@
 # workflow for testing reference sequence assignment with simulations.
-This is a project arising from the **oinformatics Food Safety Hackaton 2019**, and the main collaborators are
+This is a project arising from the **Bioinformatics Food Safety Hackaton 2019**, and the main collaborators are
 Boas van der Putten, Martin Lott, Thanh Le Viet and Leonardo de Oliveira Martins. 
 
 The idea is to
