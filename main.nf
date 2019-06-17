@@ -1,34 +1,36 @@
 #!/usr/bin/env nextflow
 // nextflow.preview.dsl = 2
-params.ref = "/qib/platforms/Informatics/hackathon2019/data/*.fasta"
+params.refdir = "/media/deolivl/QIB_deolivl/bigdata/noplasmids" 
 params.length_reads = 150
-params.seed = 1000
+params.seed = 1003
 params.output = "results"
 params.rank = false
-params.score = false
 params.assembly = false
 params.sim = 10
-params.wgsim_options = "-N 10000"
+params.besthits = 50
+params.wgsim_options = "-N 100000"
 
-refs =  Channel.fromPath(params.ref)
+reflist =  Channel.fromPath(params.refdir + "/*.gz")
+ref = reflist.randomSample(1)
 
 process simulation {
-publishDir "${params.output}/simulation", mode: "copy"
-tag {seed}
-input:
-file(ref) from refs
-each sim from 1..params.sim
-
-output:
-set seed, file("sim_${name}_${seed}_1.fq"), file("sim_${name}_${seed}_2.fq") into (sim_ch_shovill, sim_ch_refrank, sim_ch_refseq, sim_ch_get_cov)
-file ref into sim_ref_ch
-
-script:
-seed = params.seed + sim
-name = ref.getBaseName()
-"""
-wgsim $params.wgsim_options -1 ${params.length_reads} -2 ${params.length_reads} -S ${seed} ${ref} sim_${name}_${seed}_1.fq sim_${name}_${seed}_2.fq
-"""
+  publishDir "${params.output}/simulation", mode: "copy"
+  tag {seed}
+  input:
+    file ref 
+    each sim from 1..params.sim
+  output:
+    set seed, file("sim_${name}_${seed}_1.fq"), file("sim_${name}_${seed}_2.fq") into (sim_ch_shovill, sim_ch_refrank, sim_ch_refseq, sim_ch_get_cov)
+    file ref into sim_ref_ch
+  script:
+    seed = params.seed + sim
+    name = ref.getBaseName()
+    """
+    if [ ! -f ref.fas ]; then  ## must be unzipped
+      zcat ${ref} > ref.fas
+    fi
+    wgsim $params.wgsim_options -1 ${params.length_reads} -2 ${params.length_reads} -S ${seed} ref.fas sim_${name}_${seed}_1.fq sim_${name}_${seed}_2.fq
+    """
 }
 
 if (params.assembly) {
@@ -37,143 +39,117 @@ if (params.assembly) {
   cpus 8
   tag {seed}
   input:
-  set seed, file(r1), file(r2) from sim_ch_shovill
-
+    set seed, file(r1), file(r2) from sim_ch_shovill
   output:
-  set seed, file("output") into shovill_ch
-
+    set seed, file("output") into shovill_ch
   script:
-
-  """
-  shovill --outdir output --R1 $r1 --R2 $r1
-  """
+    """
+    shovill --outdir output --R1 $r1 --R2 $r1
+    """
   }
 
   process refseq_masher_assembly {
   publishDir "${params.output}/refseq_masher_assembly"
   tag {seed}
   input:
-  set seed, file(output) from shovill_ch
-
+    set seed, file(output) from shovill_ch
   output:
-  file("refseq_masher_assembly_${seed}.tsv") into masher_assembly_ch
-
+    file("refseq_masher_assembly_${seed}.tsv") into masher_assembly_ch
   script:
-
-  """
-  refseq_masher matches --top-n-results 50 --output "refseq_masher_assembly_${seed}.tsv" output/contigs.fa
-  """
+    """
+    refseq_masher matches --top-n-results 200 --output "refseq_masher_assembly_${seed}.tsv" output/contigs.fa
+    """
   }
 }
 
 process refseq_masher_reads {
-publishDir "${params.output}/refseq_masher_reads", mode: "copy"
-
-cpus 4
-
-input:
-set seed, file(r1), file(r2) from sim_ch_refseq
-
-output:
-file("refseq_masher_reads_${name}_${seed}.tsv") into masher_reads_ch
-
-script:
-name = r1.getBaseName()
-"""
-refseq_masher contains --top-n-results 50 --parallelism ${task.cpus} --output "refseq_masher_reads_${name}_${seed}.tsv" $r1 $r2
-"""
+  publishDir "${params.output}/refseq_masher_reads", mode: "copy"
+  cpus 4
+  input:
+    set seed, file(r1), file(r2) from sim_ch_refseq
+  output:
+    file("refseq_masher_reads_${name}_${seed}.tsv") into masher_reads_ch
+  script:
+    name = r1.getBaseName()
+    """
+    refseq_masher contains --top-n-results 500 --parallelism ${task.cpus} --output "refseq_masher_reads_${name}_${seed}.tsv" $r1 $r2
+    """
 }
 
 process find_GCF {
-	publishDir "${params.output}/top10hits", mode: "move" 
+	publishDir "${params.output}/tophits", mode: "copy" 
   input:
-  file tsv from masher_reads_ch
+    file tsv from masher_reads_ch
   output:
-  file("${name}_hits.tsv") into find_gcf_ch
+    file("${name}_hits.tsv") into find_gcf_ch
   
   script:
-  name = tsv.getBaseName()
+    name = tsv.getBaseName()
 
-"""
-  #!/usr/bin/env python
-import re
-with open("${tsv}","r") as ifh:
-    lines = ifh.readlines()
-    headers = lines[0].split("\\t")
-    assembly_accession_index = headers.index("assembly_accession")
-    hits = []
-    counter = 0
-    for line in lines[1:]:
-        asm = line.split("\\t")[assembly_accession_index]
-        if (re.match("^GCF", asm)) and (counter < 10):
-            hits.append(line.split("\\t")[assembly_accession_index])
-            counter += 1
-    with open("${name}_hits.tsv", "w") as ofh:
-        for hit in hits:
-            ofh.write("{}\\n".format(hit))
-  """
+    """
+    #!/usr/bin/env python
+    import re
+    with open("${tsv}","r") as ifh:
+      lines = ifh.readlines()
+      headers = lines[0].split("\\t")
+      assembly_accession_index = headers.index("assembly_accession")
+      hits = []
+      for line in lines[1:]:
+          asm = line.split("\\t")[assembly_accession_index]
+          if (re.match("^GCF", asm)):
+              hits.append(line.split("\\t")[assembly_accession_index])
+      with open("${name}_hits.tsv", "w") as ofh:
+          for hit in hits:
+              ofh.write("{}\\n".format(hit))
+    """
 }
-
 
 process get_coverage {
-publishDir "${params.output}/top10hits"
-tag {name}
+  publishDir "${params.output}/tophits", mode: "copy"
+  tag {name}
 
-input:
-set seed, file(r1), file(r2) from sim_ch_get_cov
-file(top10hits) from find_gcf_ch
-file(ref) from sim_ref_ch
-
-output:
-file("final_scores.csv")
-
-shell:
-name = ref.getBaseName()
-
-'''
-for gcf in `cat ${top10hits}`; do
-	HITTREF=`\\ls /home/centos/benchmarking-refseq/data/noplasmids/${gcf}*`
-	bwa index $HITREF
-	bwa mem $HITREF !{r1} !{r2} | samtools view -S -b - | samtools sort > sort.bam
-	bamcov -H sort.bam >> scores.csv
-done
-bwa index !{ref}
-bwa mem !{ref} !{r1} !{r2} | samtools view -S -b - | samtools sort > sort.bam
-bamcov -H sort.bam >> scores.csv
-score.py scores.csv > final_scores_!{name}_!{seed}.csv
-'''
+  input:
+    set seed, file(r1), file(r2) from sim_ch_get_cov
+    params.besthits
+    file(tophits) from find_gcf_ch
+    file(ref) from sim_ref_ch
+    val params.refdir
+  output:
+    file("final_scores_${name}_${seed}.csv")
+  shell:
+    name = ref.getBaseName()
+    '''
+    typeset -i count=0
+    for gcf in `cat ${tophits}`; do
+      if [ $count -gt !{params.besthits} ]; then break;
+      else
+        HITREF=`\\ls !{params.refdir}/${gcf}*`
+        if test x"${HITREF}" != x""; then
+          count=$count+1
+          bwa index $HITREF
+          bwa mem $HITREF !{r1} !{r2} | samtools view -S -b - | samtools sort > sort.bam
+          bamcov -H sort.bam >> scores.csv
+        fi  # if HITREF exists
+      fi    # if count == 10
+    done
+    bwa index !{ref}
+    bwa mem !{ref} !{r1} !{r2} | samtools view -S -b - | samtools sort > sort.bam
+    bamcov -H sort.bam >> scores.csv
+    score.py scores.csv > final_scores_!{name}_!{seed}.csv
+    '''
 }
-
 
 if (params.rank) {
   process ref_rank {
   input:
-  set seed, file(r1), file(r2) from sim_ch_refrank
+    set seed, file(r1), file(r2) from sim_ch_refrank
   output:
 
   script:
 
-  """
-  refrank.py --ref *fna --fastq sim_${sim}_1.fq sim_${sim}_2.fq
-  """
+    """
+    refrank.py --ref *fna --fastq sim_${sim}_1.fq sim_${sim}_2.fq
+    """
 	}
-}
-
-if (params.score) {
-process score {
-input:
-file("refseq_masher_reads_${seed}.tsv") from 
-file("refseq_masher_assembly_${seed}.tsv")
-output:
-
-script:
-
-"""
-#!/usr/bin/python
-with open("${paraarams.ref}.out", "w") as out_fh:
-  with open("refseq_masher_reads_${seed}.tsv", "r") as in_fh:
-    lines = fh.readlines()
-"""
-  }
 }
 

@@ -1,0 +1,32 @@
+2019-06-12 14:52:10	1.4s	determined_wing	OK	a9012339ce857d6ec7a078281813d8a93645a3e7	6facafc9-222e-46cd-8c63-c969a7ffff60	nextflow run hello
+2019-06-12 14:52:35	1.2s	cheesy_swartz	OK	f5f9b2d6c0c184717aec6497af73f013	97399829-97b4-4317-a704-e7abc6b0e436	nextflow main.nf
+2019-06-12 14:54:27	1.2s	focused_cray	OK	f5f9b2d6c0c184717aec6497af73f013	9a98572d-e88f-4d45-8590-9d6f17237474	nextflow run main.nf
+2019-06-12 15:30:18	1.4s	awesome_becquerel	ERR	f5f9b2d6c0c184717aec6497af73f013	4525ee22-a7f2-43d7-b46f-8cc6a9cc7acb	nextflow run --ref /usr/users/QIB_fr005/deolivl/Academic/Quadram/007.Salmonella_biofilm/NC_003197.fas main.nf
+2019-06-12 15:34:54	2m 41s	hungry_dalembert	ERR	f5f9b2d6c0c184717aec6497af73f013	d38f974c-aa65-4e65-89c5-04894efee637	nextflow run --ref /usr/users/QIB_fr005/deolivl/Academic/Quadram/007.Salmonella_biofilm/NC_003197.fas main.nf
+2019-06-17 11:35:07	-	fervent_crick	-	9e39d4352447c97d4113c6f1d66938c4	c963d274-ff90-4363-b1f3-ebf1e289cdb5	nextflow run main.nf
+2019-06-17 11:35:46	30.8s	drunk_gilbert	ERR	9eb4b04845d5a8cedeb434393830388b	55ea44b1-8610-40c0-8f5e-05e177964d88	nextflow run main.nf
+2019-06-17 11:37:09	30.4s	deadly_bose	ERR	9eb4b04845d5a8cedeb434393830388b	ec46fd44-3653-4db5-988c-454eb60a3871	nextflow run main.nf --sim 2
+2019-06-17 11:49:17	2.1s	thirsty_colden	ERR	d8510231598f0bba4438fadb03398477	bcc1ad19-bc5c-4a86-9273-0d5b28cc287b	nextflow run main.nf --sim 2
+2019-06-17 11:50:35	1.5s	soggy_golick	ERR	40d09cc239c6d7e6aa77a214b74a09b2	34ae0010-d6e1-459d-a6d7-3d8956588c9b	nextflow run main.nf --sim 2
+2019-06-17 11:52:43	1s	compassionate_linnaeus	ERR	4408fffb9104f9658ea6ee19bd28530a	e88f4034-ba63-4f36-9c9f-661ceca0be21	nextflow run main.nf --sim 2
+2019-06-17 11:55:00	-	modest_heyrovsky	-	f4237ced5ec26708008339eabaee92e2	af82d362-4086-495b-8945-c393e7f30f31	nextflow run main.nf --sim 2
+2019-06-17 11:56:04	1.7s	nostalgic_picasso	ERR	7eeaa0b09c51a8eaff777ae4c52fcb8e	dafbe241-6fc2-4e44-ba72-8ee8cd0e3400	nextflow run main.nf --sim 2
+2019-06-17 14:19:59	1.2s	crazy_legentil	ERR	b564e4ddd2a8ea123874e34602567f00	e531eb60-83a0-4c1b-8b6c-664c8d6d08c9	nextflow run main.nf --sim 2
+2019-06-17 14:20:19	32.5s	tender_hugle	ERR	2fcdc6f7aeec5d4400a8ca2860a763f1	7271fc0d-0c95-4f87-bf6d-b8fca9bbef2a	nextflow run main.nf --sim 2
+2019-06-17 14:22:08	34.4s	pedantic_euclid	ERR	a2454e11876c3784491cdfd0f16dadbd	91ef5dfe-eb25-4a99-b084-f43b61fc478f	nextflow run main.nf --sim 2 --resume
+2019-06-17 14:28:41	34.9s	magical_brown	OK	2ba72f2ec4200bed2ddab71ba39d978d	2c0ab3d2-ca09-4de5-b3ca-ef29fb43d059	nextflow run main.nf --sim 2
+2019-06-17 14:32:23	2m 36s	adoring_ekeblad	OK	942d8179763138ac84fcb0ba4be27602	87b7d9bc-4d83-41a2-a1b6-11c045608d1d	nextflow run main.nf --sim 10
+2019-06-17 14:37:55	2m 35s	confident_linnaeus	ERR	942d8179763138ac84fcb0ba4be27602	87b71bed-9d38-4fed-83d8-1c57542a49b3	nextflow run main.nf --sim 10
+2019-06-17 14:48:23	2m 35s	fervent_goldberg	ERR	942d8179763138ac84fcb0ba4be27602	4178f65a-b1b7-4c41-8713-ac2da8865616	nextflow run main.nf --sim 10
+2019-06-17 15:39:15	2m 42s	admiring_magritte	ERR	c2547a752dbf19c2c2a96734f27e3ee6	6fd8ca55-09ec-4be8-b6b5-99f980b28ee4	nextflow run main.nf --sim 10
+2019-06-17 15:47:18	1m 4s	maniac_keller	ERR	aada78d8fd8991081e2495976157118b	4a07a8fd-158b-4b75-9de0-13af33a68514	nextflow run main.nf --sim 5
+2019-06-17 15:58:14	1m 31s	peaceful_crick	OK	aada78d8fd8991081e2495976157118b	bb4db74e-c930-43fe-8c4d-944fc0893043	nextflow run main.nf --sim 5
+2019-06-17 16:05:25	-	cranky_albattani	-	09cbdc408aba41f905a543c8686deec9	2dd0d3c0-8176-4c19-b483-fa9b16f7b1a9	nextflow run main.nf --sim 5 --besthits=50
+2019-06-17 16:05:43	-	small_kalman	-	09cbdc408aba41f905a543c8686deec9	d43ef9a2-b7a6-4081-b538-31646f9beabd	nextflow run main.nf --sim 5 --besthits 50
+2019-06-17 16:08:08	-	stupefied_jepsen	-	09cbdc408aba41f905a543c8686deec9	c76161c7-1654-47b7-8a1c-1abedce97c4a	nextflow run main.nf --sim 5
+2019-06-17 16:09:03	-	fabulous_almeida	-	f5808827f94d7cd39864c86ba558b55a	124e5bed-8e3a-4b89-8889-97609370a711	nextflow run main.nf --sim 5
+2019-06-17 16:10:19	-	magical_bhaskara	-	f3903cd9bce1a770a9d024c34c0966ff	0fd010ba-1e65-4598-9f77-fffb952327f6	nextflow run main.nf --sim 5
+2019-06-17 16:10:43	4.1s	sleepy_brenner	ERR	ab27accb0751374c981e0719d7d0159d	9d0b1498-9088-4d6b-8bd2-ef0316082472	nextflow run main.nf --sim 5
+2019-06-17 16:12:40	-	soggy_albattani	-	59aaae56d03f6fc0b9430b618e7e24f2	f27c5d75-5612-4cb1-92a4-5cf9536133df	nextflow run main.nf --sim 5
+2019-06-17 16:13:07	2.9s	focused_shannon	ERR	e837c37ef74cc4d37e0fd996721c766f	c3d038d6-43e9-451e-b5eb-a0948ad8bc13	nextflow run main.nf --sim 5
+2019-06-17 16:13:41	1m 51s	determined_picasso	OK	5189cc129c6e1a815e82c38f70e44a95	6816d7e4-33b0-49f5-b841-0e42e5e5b936	nextflow run main.nf --sim 5
