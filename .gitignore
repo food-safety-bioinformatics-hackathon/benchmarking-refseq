@@ -1,3 +1,6 @@
 /work
 /data
 /results
+.nextflow.log.*
+.nextflow
+.DS_Store
