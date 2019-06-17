@@ -30,3 +30,6 @@
 2019-06-17 16:12:40	-	soggy_albattani	-	59aaae56d03f6fc0b9430b618e7e24f2	f27c5d75-5612-4cb1-92a4-5cf9536133df	nextflow run main.nf --sim 5
 2019-06-17 16:13:07	2.9s	focused_shannon	ERR	e837c37ef74cc4d37e0fd996721c766f	c3d038d6-43e9-451e-b5eb-a0948ad8bc13	nextflow run main.nf --sim 5
 2019-06-17 16:13:41	1m 51s	determined_picasso	OK	5189cc129c6e1a815e82c38f70e44a95	6816d7e4-33b0-49f5-b841-0e42e5e5b936	nextflow run main.nf --sim 5
+2019-06-17 17:18:15	53.2s	elegant_miescher	ERR	387fa0fcb0e0476367756280d86f8f82	fdcdb541-e560-4517-a98b-816d87362d05	nextflow run main.nf --sim 2
+2019-06-17 17:22:11	52.6s	spontaneous_jepsen	ERR	4fbc825d20038749b9b9e3be8b7947a8	608e8c15-bc1a-49c8-b4b6-815d478afdc3	nextflow run main.nf --sim 2
+2019-06-17 17:24:53	36.6s	zen_watson	ERR	d4d6b71c0e303611bcd2a6b92efc2beb	8b1e545e-7dc2-42d2-acb4-06c15c053509	nextflow run main.nf --sim 2

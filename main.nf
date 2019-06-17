@@ -68,11 +68,11 @@ process refseq_masher_reads {
   input:
     set seed, file(r1), file(r2) from sim_ch_refseq
   output:
-    file("refseq_masher_reads_${name}_${seed}.tsv") into masher_reads_ch
+    file("refseq_masher_reads_${name}.tsv") into masher_reads_ch
   script:
     name = r1.getBaseName()
     """
-    refseq_masher contains --top-n-results 500 --parallelism ${task.cpus} --output "refseq_masher_reads_${name}_${seed}.tsv" $r1 $r2
+    refseq_masher contains --top-n-results 500 --parallelism ${task.cpus} --output "refseq_masher_reads_${name}.tsv" $r1 $r2
     """
 }
 
@@ -116,18 +116,20 @@ process get_coverage {
     val params.refdir
   output:
     file("final_scores_${name}_${seed}.csv")
+    file("debug_${seed}.csv")
   shell:
     name = ref.getBaseName()
     '''
     typeset -i count=0
-    for gcf in `cat ${tophits}`; do
+    for gcf in `cat !{tophits}`; do
       if [ $count -gt !{params.besthits} ]; then break;
       else
         HITREF=`\\ls !{params.refdir}/${gcf}*`
         if test x"${HITREF}" != x""; then
+          echo ${HITREF} >> debug_!{seed}.csv
           count=$count+1
-          bwa index $HITREF
-          bwa mem $HITREF !{r1} !{r2} | samtools view -S -b - | samtools sort > sort.bam
+          bwa index ${HITREF}
+          bwa mem ${HITREF} !{r1} !{r2} | samtools view -S -b - | samtools sort > sort.bam
           bamcov -H sort.bam >> scores.csv
         fi  # if HITREF exists
       fi    # if count == 10

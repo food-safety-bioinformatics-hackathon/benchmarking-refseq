@@ -1,121 +1,126 @@
-Jun-17 16:13:41.425 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf --sim 5
-Jun-17 16:13:41.539 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 19.04.1
-Jun-17 16:13:41.548 [main] INFO  nextflow.cli.CmdRun - Launching `main.nf` [determined_picasso] - revision: 5189cc129c
-Jun-17 16:13:41.562 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/nextflow.config
-Jun-17 16:13:41.563 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/nextflow.config
-Jun-17 16:13:41.588 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
-Jun-17 16:13:41.913 [main] DEBUG nextflow.Session - Session uuid: 6816d7e4-33b0-49f5-b841-0e42e5e5b936
-Jun-17 16:13:41.913 [main] DEBUG nextflow.Session - Run name: determined_picasso
-Jun-17 16:13:41.914 [main] DEBUG nextflow.Session - Executor pool size: 8
-Jun-17 16:13:41.939 [main] DEBUG nextflow.cli.CmdRun - 
+Jun-17 17:24:53.327 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf --sim 2
+Jun-17 17:24:53.442 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 19.04.1
+Jun-17 17:24:53.454 [main] INFO  nextflow.cli.CmdRun - Launching `main.nf` [zen_watson] - revision: d4d6b71c0e
+Jun-17 17:24:53.469 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/nextflow.config
+Jun-17 17:24:53.470 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/nextflow.config
+Jun-17 17:24:53.501 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Jun-17 17:24:53.910 [main] DEBUG nextflow.Session - Session uuid: 8b1e545e-7dc2-42d2-acb4-06c15c053509
+Jun-17 17:24:53.911 [main] DEBUG nextflow.Session - Run name: zen_watson
+Jun-17 17:24:53.911 [main] DEBUG nextflow.Session - Executor pool size: 8
+Jun-17 17:24:53.938 [main] DEBUG nextflow.cli.CmdRun - 
   Version: 19.04.1 build 5072
   Modified: 03-05-2019 12:29 UTC (13:29 BST)
   System: Linux 4.15.0-51-generic
   Runtime: Groovy 2.5.6 on OpenJDK 64-Bit Server VM 11.0.1+13-LTS
   Encoding: UTF-8 (UTF-8)
-  Process: 31001@n114312.nbi.ac.uk [127.0.1.1]
-  CPUs: 8 - Mem: 15.5 GB (3.2 GB) - Swap: 91 MB (91 MB)
-Jun-17 16:13:41.957 [main] DEBUG nextflow.Session - Work-dir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work [ext2/ext3]
-Jun-17 16:13:42.050 [main] DEBUG nextflow.Session - Session start invoked
-Jun-17 16:13:42.054 [main] DEBUG nextflow.processor.TaskDispatcher - Dispatcher > start
-Jun-17 16:13:42.058 [main] DEBUG nextflow.script.ScriptRunner - > Script parsing
-Jun-17 16:13:42.257 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
-Jun-17 16:13:42.282 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /media/deolivl/QIB_deolivl/bigdata/noplasmids/; pattern: *.gz; options: [:]
-Jun-17 16:13:42.407 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
-Jun-17 16:13:42.407 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
-Jun-17 16:13:42.413 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
-Jun-17 16:13:42.415 [main] INFO  nextflow.executor.Executor - [warm up] executor > local
-Jun-17 16:13:42.418 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=15.5 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
-Jun-17 16:13:42.421 [main] DEBUG nextflow.processor.TaskDispatcher - Starting monitor: LocalPollingMonitor
-Jun-17 16:13:42.422 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
-Jun-17 16:13:42.424 [main] DEBUG nextflow.executor.Executor - Invoke register for executor: local
-Jun-17 16:13:42.458 [main] DEBUG nextflow.Session - >>> barrier register (process: simulation)
-Jun-17 16:13:42.464 [main] DEBUG nextflow.processor.TaskProcessor - Creating *combiner* operator for each param(s) at index(es): [1]
-Jun-17 16:13:42.475 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > simulation -- maxForks: 8
-Jun-17 16:13:42.498 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
-Jun-17 16:13:42.498 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
-Jun-17 16:13:42.498 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
-Jun-17 16:13:42.499 [main] DEBUG nextflow.Session - >>> barrier register (process: refseq_masher_reads)
-Jun-17 16:13:42.500 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > refseq_masher_reads -- maxForks: 8
-Jun-17 16:13:42.503 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
-Jun-17 16:13:42.503 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
-Jun-17 16:13:42.503 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
-Jun-17 16:13:42.504 [main] DEBUG nextflow.Session - >>> barrier register (process: find_GCF)
-Jun-17 16:13:42.504 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > find_GCF -- maxForks: 8
-Jun-17 16:13:42.524 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
-Jun-17 16:13:42.524 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
-Jun-17 16:13:42.525 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
-Jun-17 16:13:42.525 [main] DEBUG nextflow.Session - >>> barrier register (process: get_coverage)
-Jun-17 16:13:42.533 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > get_coverage -- maxForks: 8
-Jun-17 16:13:42.535 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
-Jun-17 16:13:42.535 [main] DEBUG nextflow.Session - Session await
-Jun-17 16:13:42.643 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:13:42.647 [Task submitter] INFO  nextflow.Session - [ff/013c34] Submitted process > simulation (1008)
-Jun-17 16:13:42.660 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:13:42.661 [Task submitter] INFO  nextflow.Session - [fe/f4eee3] Submitted process > simulation (1005)
-Jun-17 16:13:42.666 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:13:42.666 [Task submitter] INFO  nextflow.Session - [06/e3304c] Submitted process > simulation (1007)
-Jun-17 16:13:42.672 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:13:42.676 [Task submitter] INFO  nextflow.Session - [d7/f9e449] Submitted process > simulation (1004)
-Jun-17 16:13:42.685 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:13:42.687 [Task submitter] INFO  nextflow.Session - [69/a77921] Submitted process > simulation (1006)
-Jun-17 16:13:43.269 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: simulation (1004); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/d7/f9e4492a93887ea75c2c0148fb10aa]
-Jun-17 16:13:43.285 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:13:43.300 [Task submitter] INFO  nextflow.Session - [a9/641e57] Submitted process > refseq_masher_reads (1)
-Jun-17 16:13:43.375 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: simulation (1008); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/ff/013c343329743f893dd300c84b3807]
-Jun-17 16:13:43.403 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: simulation (1006); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/69/a7792132a6feb768e98ca5256cbb66]
-Jun-17 16:13:43.654 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: simulation (1005); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/fe/f4eee353ca73444fdd1442551b3cb0]
-Jun-17 16:13:43.662 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: simulation (1007); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/06/e3304c147d4ba4bfac8569aabb8622]
-Jun-17 16:13:43.667 [Actor Thread 11] DEBUG nextflow.Session - <<< barrier arrive (process: simulation)
-Jun-17 16:13:43.669 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:13:43.669 [Task submitter] INFO  nextflow.Session - [90/ed3771] Submitted process > refseq_masher_reads (2)
-Jun-17 16:14:15.549 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: refseq_masher_reads (1); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/a9/641e57236b6c77c3632c8d9b3ffeb5]
-Jun-17 16:14:15.554 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:15.554 [Task submitter] INFO  nextflow.Session - [ef/a9017d] Submitted process > refseq_masher_reads (3)
-Jun-17 16:14:15.794 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: refseq_masher_reads (2); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/90/ed3771d4db8110d00bd6e374294380]
-Jun-17 16:14:15.796 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:15.796 [Task submitter] INFO  nextflow.Session - [95/1dc02e] Submitted process > refseq_masher_reads (4)
-Jun-17 16:14:47.872 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: refseq_masher_reads (3); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/ef/a9017d6c1110fd7983807b67da381c]
-Jun-17 16:14:47.877 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:47.877 [Task submitter] INFO  nextflow.Session - [e8/aa3dd6] Submitted process > refseq_masher_reads (5)
-Jun-17 16:14:47.914 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: refseq_masher_reads (4); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/95/1dc02e91d003e7eb8d563dea1740d9]
-Jun-17 16:14:47.918 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:47.918 [Task submitter] INFO  nextflow.Session - [8b/0e5e4d] Submitted process > find_GCF (1)
-Jun-17 16:14:47.923 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:47.923 [Task submitter] INFO  nextflow.Session - [8d/d182f7] Submitted process > find_GCF (2)
-Jun-17 16:14:47.927 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:47.927 [Task submitter] INFO  nextflow.Session - [61/e737b1] Submitted process > find_GCF (3)
-Jun-17 16:14:47.931 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:47.931 [Task submitter] INFO  nextflow.Session - [73/0900f9] Submitted process > find_GCF (4)
-Jun-17 16:14:47.976 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 11; name: find_GCF (1); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/8b/0e5e4d1c0cc4c5e4e014e7926fdb36]
-Jun-17 16:14:47.986 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 12; name: find_GCF (2); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/8d/d182f70af3f64b7369863851c70803]
-Jun-17 16:14:47.999 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 13; name: find_GCF (3); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/61/e737b11d362bfcc11aa6c605ae80c5]
-Jun-17 16:14:48.034 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 14; name: find_GCF (4); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/73/0900f9721354f56f6dc7f274ed3430]
-Jun-17 16:14:48.057 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:48.057 [Task submitter] INFO  nextflow.Session - [16/50e6f3] Submitted process > get_coverage (GCF_900699785.1_B91_SC_genomic.fna)
-Jun-17 16:14:48.065 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:48.066 [Task submitter] INFO  nextflow.Session - [7b/7f6ae1] Submitted process > get_coverage (GCF_900699785.1_B91_SC_genomic.fna)
-Jun-17 16:14:48.070 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:48.070 [Task submitter] INFO  nextflow.Session - [fc/edb818] Submitted process > get_coverage (GCF_900699785.1_B91_SC_genomic.fna)
-Jun-17 16:14:48.073 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:14:48.074 [Task submitter] INFO  nextflow.Session - [b3/c48a34] Submitted process > get_coverage (GCF_900699785.1_B91_SC_genomic.fna)
-Jun-17 16:15:10.475 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 17; name: get_coverage (GCF_900699785.1_B91_SC_genomic.fna); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/fc/edb818e642e093a6f23cdd85613394]
-Jun-17 16:15:11.143 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 16; name: get_coverage (GCF_900699785.1_B91_SC_genomic.fna); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/16/50e6f3f803aa5ca9e49ad39c78e4e9]
-Jun-17 16:15:11.595 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 15; name: get_coverage (GCF_900699785.1_B91_SC_genomic.fna); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/7b/7f6ae19070ea59bfa75349f47d8313]
-Jun-17 16:15:15.579 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 10; name: refseq_masher_reads (5); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/e8/aa3dd6ba9bf4731c4025c6c3b05db6]
-Jun-17 16:15:15.580 [Actor Thread 17] DEBUG nextflow.Session - <<< barrier arrive (process: refseq_masher_reads)
-Jun-17 16:15:15.583 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:15:15.583 [Task submitter] INFO  nextflow.Session - [96/f2b7fa] Submitted process > find_GCF (5)
-Jun-17 16:15:15.618 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 19; name: find_GCF (5); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/96/f2b7fa4fbaa64eafc30247648f682a]
-Jun-17 16:15:15.619 [Actor Thread 20] DEBUG nextflow.Session - <<< barrier arrive (process: find_GCF)
-Jun-17 16:15:15.622 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
-Jun-17 16:15:15.623 [Task submitter] INFO  nextflow.Session - [67/a0b0d0] Submitted process > get_coverage (GCF_900699785.1_B91_SC_genomic.fna)
-Jun-17 16:15:16.323 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 18; name: get_coverage (GCF_900699785.1_B91_SC_genomic.fna); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/b3/c48a34a5a1d13a90f2ed9f8b0cc9cc]
-Jun-17 16:15:32.092 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 20; name: get_coverage (GCF_900699785.1_B91_SC_genomic.fna); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/67/a0b0d092ae7d4d2b3107975fd1ba87]
-Jun-17 16:15:32.093 [Actor Thread 17] DEBUG nextflow.Session - <<< barrier arrive (process: get_coverage)
-Jun-17 16:15:32.093 [main] DEBUG nextflow.Session - Session await > all process finished
-Jun-17 16:15:32.093 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local)
-Jun-17 16:15:32.093 [main] DEBUG nextflow.Session - Session await > all barriers passed
-Jun-17 16:15:32.096 [main] DEBUG nextflow.trace.StatsObserver - Workflow completed > WorkflowStats[succeedCount=20; failedCount=0; ignoredCount=0; cachedCount=0; succeedDuration=12m 22s; failedDuration=0ms; cachedDuration=0ms]
-Jun-17 16:15:32.122 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
-Jun-17 16:15:32.132 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
+  Process: 2770@n114312.nbi.ac.uk [127.0.1.1]
+  CPUs: 8 - Mem: 15.5 GB (5.9 GB) - Swap: 91 MB (91 MB)
+Jun-17 17:24:53.956 [main] DEBUG nextflow.Session - Work-dir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work [ext2/ext3]
+Jun-17 17:24:54.057 [main] DEBUG nextflow.Session - Session start invoked
+Jun-17 17:24:54.061 [main] DEBUG nextflow.processor.TaskDispatcher - Dispatcher > start
+Jun-17 17:24:54.064 [main] DEBUG nextflow.script.ScriptRunner - > Script parsing
+Jun-17 17:24:54.366 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jun-17 17:24:54.397 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /media/deolivl/QIB_deolivl/bigdata/noplasmids/; pattern: *.gz; options: [:]
+Jun-17 17:24:54.542 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
+Jun-17 17:24:54.542 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
+Jun-17 17:24:54.549 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
+Jun-17 17:24:54.551 [main] INFO  nextflow.executor.Executor - [warm up] executor > local
+Jun-17 17:24:54.555 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=15.5 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+Jun-17 17:24:54.559 [main] DEBUG nextflow.processor.TaskDispatcher - Starting monitor: LocalPollingMonitor
+Jun-17 17:24:54.560 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Jun-17 17:24:54.563 [main] DEBUG nextflow.executor.Executor - Invoke register for executor: local
+Jun-17 17:24:54.604 [main] DEBUG nextflow.Session - >>> barrier register (process: simulation)
+Jun-17 17:24:54.611 [main] DEBUG nextflow.processor.TaskProcessor - Creating *combiner* operator for each param(s) at index(es): [1]
+Jun-17 17:24:54.623 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > simulation -- maxForks: 8
+Jun-17 17:24:54.650 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
+Jun-17 17:24:54.651 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
+Jun-17 17:24:54.651 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
+Jun-17 17:24:54.652 [main] DEBUG nextflow.Session - >>> barrier register (process: refseq_masher_reads)
+Jun-17 17:24:54.653 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > refseq_masher_reads -- maxForks: 8
+Jun-17 17:24:54.658 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
+Jun-17 17:24:54.658 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
+Jun-17 17:24:54.658 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
+Jun-17 17:24:54.659 [main] DEBUG nextflow.Session - >>> barrier register (process: find_GCF)
+Jun-17 17:24:54.659 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > find_GCF -- maxForks: 8
+Jun-17 17:24:54.666 [main] DEBUG nextflow.processor.ProcessFactory - << taskConfig executor: null
+Jun-17 17:24:54.666 [main] DEBUG nextflow.processor.ProcessFactory - >> processorType: 'local'
+Jun-17 17:24:54.666 [main] DEBUG nextflow.executor.Executor - Initializing executor: local
+Jun-17 17:24:54.668 [main] DEBUG nextflow.Session - >>> barrier register (process: get_coverage)
+Jun-17 17:24:54.678 [main] DEBUG nextflow.processor.TaskProcessor - Creating operator > get_coverage -- maxForks: 8
+Jun-17 17:24:54.681 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Jun-17 17:24:54.681 [main] DEBUG nextflow.Session - Session await
+Jun-17 17:24:54.817 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-17 17:24:54.822 [Task submitter] INFO  nextflow.Session - [fe/7e40e6] Submitted process > simulation (1005)
+Jun-17 17:24:54.837 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-17 17:24:54.837 [Task submitter] INFO  nextflow.Session - [27/8ea2b6] Submitted process > simulation (1004)
+Jun-17 17:24:55.392 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: simulation (1004); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/27/8ea2b69f5e0932426b080088cecd8e]
+Jun-17 17:24:55.409 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-17 17:24:55.409 [Task submitter] INFO  nextflow.Session - [cd/092387] Submitted process > refseq_masher_reads (1)
+Jun-17 17:24:55.487 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: simulation (1005); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/fe/7e40e673e980c1c24d7e1238fdbc9b]
+Jun-17 17:24:55.494 [Actor Thread 2] DEBUG nextflow.Session - <<< barrier arrive (process: simulation)
+Jun-17 17:24:55.499 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-17 17:24:55.499 [Task submitter] INFO  nextflow.Session - [1a/644a83] Submitted process > refseq_masher_reads (2)
+Jun-17 17:25:28.735 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: refseq_masher_reads (2); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/1a/644a8367c4a82f06060a57103bfa31]
+Jun-17 17:25:28.744 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-17 17:25:28.744 [Task submitter] INFO  nextflow.Session - [7d/e4f492] Submitted process > find_GCF (1)
+Jun-17 17:25:28.786 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: find_GCF (1); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/7d/e4f49284f9fb7c8c5491057a175f4c]
+Jun-17 17:25:28.827 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-17 17:25:28.827 [Task submitter] INFO  nextflow.Session - [ab/a539e2] Submitted process > get_coverage (GCF_000835285.1_ASM83528v1_genomic.fna)
+Jun-17 17:25:28.873 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: refseq_masher_reads (1); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/cd/092387c7179a67f0e2ecc304c074d6]
+Jun-17 17:25:28.875 [Actor Thread 8] DEBUG nextflow.Session - <<< barrier arrive (process: refseq_masher_reads)
+Jun-17 17:25:28.879 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-17 17:25:28.879 [Task submitter] INFO  nextflow.Session - [a2/d27712] Submitted process > find_GCF (2)
+Jun-17 17:25:28.923 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: find_GCF (2); status: COMPLETED; exit: 0; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/a2/d27712bbb26b2d4f28f63ec054a3b3]
+Jun-17 17:25:28.925 [Actor Thread 6] DEBUG nextflow.Session - <<< barrier arrive (process: find_GCF)
+Jun-17 17:25:28.933 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-17 17:25:28.933 [Task submitter] INFO  nextflow.Session - [25/3c8fa5] Submitted process > get_coverage (GCF_000835285.1_ASM83528v1_genomic.fna)
+Jun-17 17:25:29.310 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: get_coverage (GCF_000835285.1_ASM83528v1_genomic.fna); status: COMPLETED; exit: 1; error: -; workDir: /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/ab/a539e29c601d7dc51f94fc40e1ec4a]
+Jun-17 17:25:29.368 [Task monitor] ERROR nextflow.processor.TaskProcessor - Error executing process > 'get_coverage (GCF_000835285.1_ASM83528v1_genomic.fna)'
+
+Caused by:
+  Process `get_coverage (GCF_000835285.1_ASM83528v1_genomic.fna)` terminated with an error exit status (1)
+
+Command executed:
+
+  typeset -i count=0
+  for gcf in `cat refseq_masher_reads_sim_GCF_000835285.1_ASM83528v1_genomic.fna_1005_1_1005_hits.tsv`; do
+    if [ $count -gt 50 ]; then break;
+    else
+      HITREF=`\ls /media/deolivl/QIB_deolivl/bigdata/noplasmids/${gcf}*`
+      if test x"${HITREF}" != x""; then
+        echo ${HITREF} >> debug_1004.csv
+        count=$count+1
+        bwa index ${HITREF}
+        bwa mem ${HITREF} sim_GCF_000835285.1_ASM83528v1_genomic.fna_1004_1.fq sim_GCF_000835285.1_ASM83528v1_genomic.fna_1004_2.fq | samtools view -S -b - | samtools sort > sort.bam
+        bamcov -H sort.bam >> scores.csv
+      fi  # if HITREF exists
+    fi    # if count == 10
+  done
+  bwa index GCF_000835285.1_ASM83528v1_genomic.fna.gz
+  bwa mem GCF_000835285.1_ASM83528v1_genomic.fna.gz sim_GCF_000835285.1_ASM83528v1_genomic.fna_1004_1.fq sim_GCF_000835285.1_ASM83528v1_genomic.fna_1004_2.fq | samtools view -S -b - | samtools sort > sort.bam
+  bamcov -H sort.bam >> scores.csv
+  score.py scores.csv > final_scores_GCF_000835285.1_ASM83528v1_genomic.fna_1004.csv
+
+Command exit status:
+  1
+
+Command output:
+  (empty)
+
+Command error:
+  [bwa_index] Pack FASTA... 0.03 sec
+  [bwa_index] Construct BWT for the packed sequence...
+  [fseek] Invalid argument
+
+Work dir:
+  /usr/users/QIB_fr005/deolivl/Academic/Quadram/014.hackaton2019/benchmarking-refseq/work/ab/a539e29c601d7dc51f94fc40e1ec4a
+
+Tip: when you have fixed the problem you can continue the execution appending to the nextflow command line the option `-resume`
+Jun-17 17:25:29.380 [Task monitor] DEBUG nextflow.Session - Session aborted -- Cause: Process `get_coverage (GCF_000835285.1_ASM83528v1_genomic.fna)` terminated with an error exit status (1)
+Jun-17 17:25:29.441 [main] DEBUG nextflow.Session - Session await > all process finished
+Jun-17 17:25:29.443 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jun-17 17:25:29.443 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local)
+Jun-17 17:25:29.451 [main] WARN  n.processor.TaskPollingMonitor - Killing pending tasks (1)
+Jun-17 17:25:29.464 [main] DEBUG nextflow.trace.StatsObserver - Workflow completed > WorkflowStats[succeedCount=6; failedCount=2; ignoredCount=0; cachedCount=0; succeedDuration=4m 27s; failedDuration=433ms; cachedDuration=0ms]
+Jun-17 17:25:29.587 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Jun-17 17:25:29.604 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
